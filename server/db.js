@@ -3,9 +3,9 @@
 
 module.exports={
 	db: {
-		host : 'localhost',
+		host : '110.110.112.203',
 		user : 'root',
 		password : 'root',
-		database : 'atmecsreporting'
+		database : 'intclassec'
 	}
 };

@@ -1,0 +1,32 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+            <!--md-icon md-svg-icon="img/icons/menu.svg"></md-icon-->
+        </md-button>
+
+        <h2 flex md-truncate>Project Details</h2>
+
+        <span flex></span>
+        <span ng-show="currentUser">
+		     <!--a href="#!logout" ng-click="logout()">Logout</a-->
+
+             <md-button class="md-icon-button test-tooltip" aria-label="logout" ng-click="logout()">
+                <md-tooltip md-direction="bottom">Logout</md-tooltip>
+                    <md-icon md-svg-src="img/icons/ic_exit_to_app_white_24px.svg"
+                             style="width: 24px; height: 24px">
+                    </md-icon>
+             </md-button>
+		   </span>
+    </div>
+</md-toolbar>
+<md-content layout-padding layout-margin="6px">
+
+    <form name="taskForm">
+        <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="task in tasks">
+            <p>{{ task.projecttask }} {{ task.projecttaskstatus }}</p>
+            <md-switch class="md-secondary" aria-label="task.projecttaskstatus" ng-model="status.cb1" ng-if="task.projecttaskstatus == 'red'" ng-change="updatetaskvalue(project, task.projecttask, task.projecttaskstatus)"></md-switch>
+            <md-switch class="md-secondary" aria-label="task.projecttaskstatus" ng-model="status.cb2" ng-if="task.projecttaskstatus != 'red'" ng-change="updatetaskvalue(project, task.projecttask, task.projecttaskstatus)"></md-switch>
+            <!--md-switch class="md-secondary" name="projectStatus" ng-model="project.status" ng-model-options="{ getterSetter: true, updateOn: 'change' }"></md-switch-->
+        </md-list-item>
+    </form>
+</md-content>

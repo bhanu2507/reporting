@@ -1,3 +1,40 @@
-<h1>Profile</h1>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+            <!--md-icon md-svg-icon="img/icons/menu.svg"></md-icon-->
+        </md-button>
 
-<h3>User: {{ currentUser.username }}</h3>
+        <h2 flex md-truncate>Project Details</h2>
+
+        <span flex></span>
+        <span ng-show="currentUser">
+		     <!--a href="#!logout" ng-click="logout()">Logout</a-->
+
+             <md-button class="md-icon-button test-tooltip" aria-label="logout" ng-click="logout()">
+                <md-tooltip md-direction="bottom">Logout</md-tooltip>
+                    <md-icon md-svg-src="img/icons/ic_exit_to_app_white_24px.svg"
+                             style="width: 24px; height: 24px">
+                    </md-icon>
+             </md-button>
+		   </span>
+    </div>
+</md-toolbar>
+<md-content layout-padding layout-margin="6px">
+
+    <h3>User: {{ currentUser.data.username }}</h3>
+    <form name="projectForm">
+    <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="project in projects">
+        <p>{{ project.projectname }}</p>
+            <md-switch class="md-secondary" aria-label="project.status" ng-model="status.cb1" ng-if="project.status == 'red'" ng-change="updatevalue(project.projectname, project.status)"></md-switch>
+            <md-switch class="md-secondary" aria-label="project.status" ng-model="status.cb2" ng-if="project.status != 'red'" ng-change="updatevalue(project.projectname, project.status)"></md-switch>
+        <!--md-switch class="md-secondary" name="projectStatus" ng-model="project.status" ng-model-options="{ getterSetter: true, updateOn: 'change' }"></md-switch-->
+        <md-button class="md-icon-button test-tooltip" aria-label="tasks" ng-click="detail(project.projectname)">
+            <md-tooltip md-direction="bottom">Tasks</md-tooltip>
+            <md-icon md-svg-src="img/icons/ic_message_black_24px.svg"
+                     style="width: 24px; height: 24px">
+            </md-icon>
+        </md-button>
+    </md-list-item>
+    </form>
+</md-content>
+

@@ -12,7 +12,9 @@ require('./server/config/passport')(passport); // pass passport for configuratio
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 app.use(session({
-    secret: 'this is the secret'
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
 }));
 app.use(cookieParser());
 app.use(passport.initialize());
@@ -30,8 +32,11 @@ require('./server/routes/auth.js')(app, passport);
 
 pdtls = require('./server/projectdtls');
 
-
 app.get('/pstatus', pdtls.getprojectstatus);
+app.get('/plist', pdtls.listprojects);
+app.get('/tlist', pdtls.listtasks);
+app.post('/updateprojectstatus', pdtls.updateprojectstatus);
+app.post('/updatetaskstatus', pdtls.updatetaskstatus);
 
 app.use('/scripts', express.static(__dirname + '/node_modules/'));
 

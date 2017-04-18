@@ -1,4 +1,58 @@
-<h1>Login</h1>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+            <!--md-icon md-svg-icon="img/icons/menu.svg"></md-icon-->
+        </md-button>
+
+        <h2 flex md-truncate>Login</h2>
+
+        <span flex></span>
+        <!--md-button class="md-icon-button test-tooltip" aria-label="New">
+            <md-tooltip md-direction="left">Refresh</md-tooltip>
+            <a href="#!/reqinst">
+            <md-icon md-svg-src="img/icons/ic_open_in_new_white_24px.svg"
+                     style="width: 24px; height: 24px">
+            </md-icon></a>
+        </md-button-->
+    </div>
+</md-toolbar>
+<md-content layout-padding layout-margin>
+    <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch >
+        <form name="userForm" ng-submit="userForm.$valid && login(user)">
+            <div layout-gt-sm="column" layout-align="center center">
+                <md-input-container class="md-block" flex="150">
+                    <label>Username</label>
+                    <input name="user.username" ng-model="user.username" required>
+                    <div ng-messages="userForm.user.username.$error">
+                        <div ng-message="required">
+                            Please enter Username.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="150">
+                    <label>Password</label>
+                    <input type="password" name="user.password" ng-model="user.password" required>
+                    <div ng-messages="userForm.user.password.$error">
+                        <div ng-message="required">
+                            Please enter Password.
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                <md-card-actions layout="row" layout-align="center">
+                    <md-button class="md-raised md-primary" type="submit">Proceed</md-button>
+                </md-card-actions>
+            </md-card>
+        </form>
+
+    </md-card>
+
+
+</md-content>
+
+<!--h1>Login</h1>
 
 <p>
     <input ng-model="user.username"/></br>
@@ -6,4 +60,4 @@
     <button ng-click="login(user)">Login</button>
 </p>
 
-<p>Login or Register with:</p>
+<p>Login or Register with:</p-->

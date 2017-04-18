@@ -1,0 +1,33 @@
+
+
+/*
+ * The bar:
+ */
+
+md-switch .md-bar {
+    background-color: green; /* set not selected bar color */
+}
+
+md-switch.md-checked .md-bar {
+    background-color: red; /* set selected bar color */
+}
+
+md-switch[disabled] .md-bar {
+    background-color: rgba(51, 51, 51, .15); /* set disabled bar color */
+}
+
+/*
+ * The switch:
+ */
+
+md-switch .md-thumb {
+    color: rgb(158,158,158); /* not selected switch color */
+}
+
+md-switch.md-checked .md-thumb {
+    background-color: rgb(255,255,255); /* selected switch color */
+}
+
+md-switch[disabled] .md-thumb {
+    background-color: rgb(255,255,255); /* disabled switch color */
+}

@@ -15,6 +15,14 @@ app.config(function($routeProvider) {
         })
         .when('/profile', {
             templateUrl: 'view/profile.html',
+            controller: 'NavCtrl',
+            resolve: {
+                logincheck: checkLoggedin
+            }
+        })
+        .when('/profile/:project', {
+            templateUrl: 'view/tasks.html',
+            controller: 'TaskCtrl',
             resolve: {
                 logincheck: checkLoggedin
             }
@@ -24,13 +32,17 @@ app.config(function($routeProvider) {
         })
 });
 
+app.config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default').primaryPalette('cyan').accentPalette('light-blue');
+});
+
 var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
     var deferred = $q.defer();
-
     $http.get('/loggedin').then(function(user) {
+        //console.log(user);
         $rootScope.errorMessage = null;
         //User is Authenticated
-        if (user !== '0') {
+        if (user.data !== '0') {
             $rootScope.currentUser = user;
             deferred.resolve();
         } else { //User is not Authenticated

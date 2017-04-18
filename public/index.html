@@ -3,8 +3,9 @@
 <head>
     <base href="/">
     <meta charset="UTF-8">
-    <title>AT Classec</title>
-    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css' />
+    <title>ATMECS Project Report</title>
+    <!--link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css' /-->
+    <link rel='stylesheet' href='css/local.css' />
     <link rel='stylesheet' href='scripts/angular-material/angular-material.css' />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -22,21 +23,21 @@
                 <span>ATMECS Project Report</span>
             </h2>
             <span flex></span>
-            <a href="home">Home</a> |
             <span ng-show="!currentUser">
-		     <a href="#!login">Login</a> |
-		   </span>
-            <span ng-show="currentUser">
-		     <a href="#!profile">Profile</a> |
-		     <a href="#!logout" ng-click="logout()">Logout</a>
+		     <!--a href="#!login">Login</a-->
+             <a href="#!login">
+             <md-button class="md-icon-button test-tooltip" aria-label="login">
+                <md-tooltip md-direction="bottom">Login</md-tooltip>
+                    <md-icon md-svg-src="img/icons/ic_account_box_white_24px.svg"
+                             style="width: 24px; height: 24px">
+                    </md-icon>
+             </md-button></a>
 		   </span>
         </div>
     </md-toolbar>
-    <!--md-content layout="row" flex>
+    <md-content layout="row" flex>
         <div layout="column" flex ng-view></div>
-    </md-content-->
-    <div ng-view>
-    </div>
+    </md-content>
     <div class="footer">
         <div class="container">
             <!--p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team and Firebase</p-->
