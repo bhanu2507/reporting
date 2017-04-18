@@ -27,7 +27,7 @@ app.controller("NavCtrl", function($rootScope, $scope, $http, $location) {
            }
            $http.post("/updateprojectstatus?project=" + project + "&status=" + status)
                .then(function(response) {
-                    console.log(response);
+                  // console.log(response);
                });
        }
     $scope.status = {
@@ -61,13 +61,13 @@ app.controller("LoginCtrl", function($location, $scope, $http, $rootScope) {
     }
 });
 
-app.controller("TaskCtrl", function($location, $scope, $http, $routeParams) {
-    console.log($routeParams.project);
+app.controller("TaskCtrl", function($location, $scope, $http, $routeParams, $rootScope) {
+    //console.log($routeParams.project);
     $scope.project = $routeParams.project;
     $http.get('/tlist?project=' + $routeParams.project)
         .then(function(tlist) {
             $scope.tasks = tlist.data;
-            console.log(tlist.data);
+            //console.log(tlist.data);
         })
     $scope.status = {
         cb1: true,
@@ -87,7 +87,14 @@ app.controller("TaskCtrl", function($location, $scope, $http, $routeParams) {
         }
         $http.post("/updatetaskstatus?project=" + project + "&status=" + status + "&task=" + task)
             .then(function(response) {
-                console.log(response);
+               // console.log(response);
+            });
+    }
+    $scope.logout = function() {
+        $http.post("/logout")
+            .then(function() {
+                $rootScope.currentUser = null;
+                $location.url("/home");
             });
     }
 });

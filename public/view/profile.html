@@ -21,7 +21,7 @@
 </md-toolbar>
 <md-content layout-padding layout-margin="6px">
 
-    <h3>User: {{ currentUser.data.username }}</h3>
+    <h3>Welcome back, {{ currentUser.data.username }}</h3>
     <form name="projectForm">
     <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="project in projects">
         <p>{{ project.projectname }}</p>

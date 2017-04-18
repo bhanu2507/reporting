@@ -20,10 +20,10 @@
     </div>
 </md-toolbar>
 <md-content layout-padding layout-margin="6px">
-
+    <h3>The tasks currently listed in {{ project }} project are </h3>
     <form name="taskForm">
         <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="task in tasks">
-            <p>{{ task.projecttask }} {{ task.projecttaskstatus }}</p>
+            <p>{{ task.projecttask }}</p>
             <md-switch class="md-secondary" aria-label="task.projecttaskstatus" ng-model="status.cb1" ng-if="task.projecttaskstatus == 'red'" ng-change="updatetaskvalue(project, task.projecttask, task.projecttaskstatus)"></md-switch>
             <md-switch class="md-secondary" aria-label="task.projecttaskstatus" ng-model="status.cb2" ng-if="task.projecttaskstatus != 'red'" ng-change="updatetaskvalue(project, task.projecttask, task.projecttaskstatus)"></md-switch>
             <!--md-switch class="md-secondary" name="projectStatus" ng-model="project.status" ng-model-options="{ getterSetter: true, updateOn: 'change' }"></md-switch-->
