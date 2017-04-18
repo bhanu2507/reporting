@@ -23,18 +23,35 @@
 
     <h3>Welcome back, {{ currentUser.data.username }}</h3>
     <form name="projectForm">
-    <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="project in projects">
-        <p>{{ project.projectname }}</p>
-            <md-switch class="md-secondary" aria-label="project.status" ng-model="status.cb1" ng-if="project.status == 'red'" ng-change="updatevalue(project.projectname, project.status)"></md-switch>
-            <md-switch class="md-secondary" aria-label="project.status" ng-model="status.cb2" ng-if="project.status != 'red'" ng-change="updatevalue(project.projectname, project.status)"></md-switch>
-        <!--md-switch class="md-secondary" name="projectStatus" ng-model="project.status" ng-model-options="{ getterSetter: true, updateOn: 'change' }"></md-switch-->
-        <md-button class="md-icon-button test-tooltip" aria-label="tasks" ng-click="detail(project.projectname)">
-            <md-tooltip md-direction="bottom">Tasks</md-tooltip>
-            <md-icon md-svg-src="img/icons/ic_message_black_24px.svg"
-                     style="width: 24px; height: 24px">
-            </md-icon>
-        </md-button>
-    </md-list-item>
+
+    <div ng-repeat="project in projects" ng-include="getTemplate(project)">
+    </div>
+        <script type="text/ng-template" id="display">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                <md-card-content layout="row">
+                    <h3>{{ project.projectname }}</h3>
+                    <span flex></span>
+                    <p>{{ project.pstatus }}</p>
+                    <md-button class="md-accent md-raised" ng-click="detail(project.projectname)">Tasks</md-button>
+                    <md-button class="md-accent md-raised" ng-click="editparam(project)">Edit</md-button>
+                </md-card-content>
+            </md-card>
+        </script>
+        <script type="text/ng-template" id="edit">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                <md-card-content layout="row">
+                    <h3>{{ project.projectname }}</h3>
+                    <span flex></span>
+                    <md-select ng-model="project.status" aria-label={{project.projectname}}>
+                        <md-option ng-repeat="status in statuses" value="{{status.color}}" ng-selected="status.color == project.pstatus">{{ status.color }}</md-option>
+                    </md-select>
+                    <md-button class="md-primary md-raised" ng-click="updatevalue(project)">Save</md-button>
+                    <md-button class="md-primary md-raised" ng-click="reset()">Cancel</md-button>
+                </md-card-content>
+            </md-card>
+        </script>
+
+
     </form>
 </md-content>
 

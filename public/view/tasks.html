@@ -22,11 +22,35 @@
 <md-content layout-padding layout-margin="6px">
     <h3>The tasks currently listed in {{ project }} project are </h3>
     <form name="taskForm">
-        <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="task in tasks">
+        <div ng-repeat="task in tasks" ng-include="getTemplate(task)">
+        </div>
+        <script type="text/ng-template" id="display">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                <md-card-content layout="row">
+                    <h3>{{ task.projecttask }}</h3>
+                    <span flex></span>
+                    <p>{{ task.projecttaskstatus }}</p>
+                    <md-button class="md-accent md-raised" ng-click="editparam(task)">Edit</md-button>
+                </md-card-content>
+            </md-card>
+        </script>
+        <script type="text/ng-template" id="edit">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                <md-card-content layout="row">
+                    <h3>{{ task.projecttask }}</h3>
+                    <span flex></span>
+                    <md-select ng-model="task.projecttaskstatus" aria-label={{task.projecttask}}>
+                        <md-option ng-repeat="status in statuses" value="{{status.color}}" ng-selected="status.color == task.projecttaskstatus">{{ status.color }}</md-option>
+                    </md-select>
+                    <md-button class="md-primary md-raised" ng-click="updatetaskvalue(task)">Save</md-button>
+                    <md-button class="md-primary md-raised" ng-click="reset()">Cancel</md-button>
+                </md-card-content>
+            </md-card>
+        </script>
+        <!--md-list-item ng-repeat="task in tasks">
             <p>{{ task.projecttask }}</p>
             <md-switch class="md-secondary" aria-label="task.projecttaskstatus" ng-model="status.cb1" ng-if="task.projecttaskstatus == 'red'" ng-change="updatetaskvalue(project, task.projecttask, task.projecttaskstatus)"></md-switch>
             <md-switch class="md-secondary" aria-label="task.projecttaskstatus" ng-model="status.cb2" ng-if="task.projecttaskstatus != 'red'" ng-change="updatetaskvalue(project, task.projecttask, task.projecttaskstatus)"></md-switch>
-            <!--md-switch class="md-secondary" name="projectStatus" ng-model="project.status" ng-model-options="{ getterSetter: true, updateOn: 'change' }"></md-switch-->
-        </md-list-item>
+        </md-list-item-->
     </form>
 </md-content>

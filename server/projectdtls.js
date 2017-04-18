@@ -36,9 +36,10 @@ var projecttaskstatus = "";
 
 
 exports.listprojects = function(req, res) {
-    connection.query("Select * from projectstatus", function(err, rows, fields) {
+    connection.query("Select projectname, status as pstatus from projectstatus", function(err, rows, fields) {
         if (!err) {
             res.send(rows);
+            //console.log(rows);
         }
         else
             console.log(err.message);
@@ -48,6 +49,7 @@ exports.listprojects = function(req, res) {
 exports.updateprojectstatus = function(req, res) {
     connection.query("update projectstatus set status='" + req.query.status + "' where projectname ='" + req.query.project + "'", function(err, rows, fields) {
         if (!err) {
+            //console.log("called");
             res.send(rows);
         }
         else
@@ -68,7 +70,7 @@ exports.updatetaskstatus = function(req, res) {
 
 exports.listtasks = function (req, res) {
     var project = req.query.project;
-    connection.query("Select projecttask, projecttaskstatus from projecttasks where projectname='" + project +"'", function(err, rows, fields) {
+    connection.query("Select projectname, projecttask, projecttaskstatus from projecttasks where projectname='" + project +"'", function(err, rows, fields) {
         if (!err) {
             res.send(rows);
         }
